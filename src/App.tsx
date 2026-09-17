@@ -1,122 +1,65 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from "react";
+import BackupDialog from "./components/common/BackupDialog";
+import DailyColumn from "./components/daily/DailyColumn";
+import MemoColumn from "./components/memo/MemoColumn";
+import WeeklyColumn from "./components/weekly/WeeklyColumn";
+import { useAutoHide } from "./hooks/useAutoHide";
+import { useMidnightRefresh } from "./hooks/useMidnightRefresh";
 
-function App() {
-  const [count, setCount] = useState(0)
+const GRID_COLS = "grid-cols-[minmax(300px,1fr)_minmax(340px,1fr)_minmax(300px,0.85fr)]";
+
+export default function App() {
+  const [backupOpen, setBackupOpen] = useState(false);
+  const { hidden, show, handleMouseEnter, handleMouseLeave } = useAutoHide(backupOpen);
+  useMidnightRefresh();
+
+  function openBackup() {
+    setBackupOpen(true);
+    show();
+  }
+
+  function closeBackup() {
+    setBackupOpen(false);
+    show();
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <div className="flex h-screen flex-col overflow-hidden">
+      <div onMouseEnter={show} className="fixed inset-x-0 top-0 z-10 h-2.5" aria-hidden="true" />
+
+      <header
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={show}
+        className={`grid flex-none overflow-hidden ${GRID_COLS} transition-[height,opacity] duration-300 ${
+          hidden ? "h-0 opacity-0" : "h-[60px] opacity-100"
+        }`}
+      >
+        <div
+          className="flex items-center px-7"
+          style={{ backgroundColor: "color-mix(in oklch, var(--color-dark), white 55%)" }}
         >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+          <h1 className="text-[22px] font-extrabold tracking-tight text-deep">SAMDAN</h1>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+        <div style={{ backgroundColor: "color-mix(in oklch, var(--color-mid), white 55%)" }} />
+        <div className="flex items-center justify-end bg-pale px-7 text-dark">
+          <button
+            type="button"
+            onClick={openBackup}
+            className="rounded-full border border-dark/20 px-3.5 py-1 text-[13px] hover:border-dark"
+          >
+            백업 / 복원
+          </button>
         </div>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <main className={`grid min-h-0 flex-1 ${GRID_COLS}`}>
+        <WeeklyColumn />
+        <DailyColumn />
+        <MemoColumn />
+      </main>
+
+      <BackupDialog open={backupOpen} onClose={closeBackup} />
+    </div>
+  );
 }
-
-export default App

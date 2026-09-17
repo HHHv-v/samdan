@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans KR", sans-serif;
+
+  --color-dark: #3d5f3e;
+  --color-mid: #759c7f;
+  --color-light: #e7efda;
+  --color-deep: color-mix(in oklch, var(--color-dark), black 38%);
+  --color-pale: color-mix(in oklch, var(--color-light), white 55%);
+}
+
+html {
+  font-family: var(--font-sans);
+}
