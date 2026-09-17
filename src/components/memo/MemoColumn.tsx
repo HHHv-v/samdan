@@ -33,7 +33,7 @@ export default function MemoColumn() {
   return (
     <section className="flex min-h-0 flex-col overflow-y-auto bg-light px-7 py-6 text-dark">
       <div className="mb-[22px] flex min-h-10 items-center">
-        <h2 className="text-[30px] font-extrabold tracking-tight">MEMO</h2>
+        <h2 className="font-display text-[30px] tracking-tight">MEMO</h2>
       </div>
 
       <MemoTiles memos={memos} activeId={activeMemoId} onSelect={setActiveMemo} onAdd={addMemo} />

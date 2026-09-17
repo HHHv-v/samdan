@@ -46,6 +46,7 @@ export default defineConfig([
 
 You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
 
+
 ```js
 // eslint.config.js
 import reactX from 'eslint-plugin-react-x'
@@ -73,3 +74,7 @@ export default defineConfig([
 ])
 
 ```
+
+## 폰트 출처
+
+- 창원단감아삭체 Bold - 창원특례시 (https://noonnu.cc/font_page/649)

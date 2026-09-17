@@ -21,7 +21,7 @@ export default function WeeklyColumn() {
   return (
     <section className="flex min-h-0 flex-col overflow-y-auto bg-dark px-7 py-6 text-light">
       <div className="mb-[22px] flex min-h-10 items-center justify-between gap-2">
-        <h2 className="shrink-0 text-[30px] font-extrabold tracking-tight">WEEKLY</h2>
+        <h2 className="shrink-0 font-display text-[30px] tracking-tight">WEEKLY</h2>
         <div className="flex shrink-0 items-center gap-1">
           {!isCurrentWeek && (
             <button

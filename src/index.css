@@ -1,11 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "ChangwonDanggamAsak";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/CWDangamAsac-Bold.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-sans: "Noto Sans KR", sans-serif;
+  --font-display: "ChangwonDanggamAsak", sans-serif;
 
-  --color-dark: #3d5f3e;
-  --color-mid: #759c7f;
-  --color-light: #e7efda;
+  --color-dark: #212121;
+  --color-mid: #929292;
+  --color-light: #f4f4f4;
   --color-deep: color-mix(in oklch, var(--color-dark), black 38%);
   --color-pale: color-mix(in oklch, var(--color-light), white 55%);
 }

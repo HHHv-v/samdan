@@ -29,7 +29,7 @@ export default function DailyColumn() {
   return (
     <section className="flex min-h-0 flex-col overflow-y-auto bg-mid px-7 py-6 text-deep">
       <div className="mb-[22px] flex min-h-10 items-center justify-between gap-2">
-        <h2 className="shrink-0 text-[30px] font-extrabold tracking-tight">DAILY</h2>
+        <h2 className="shrink-0 font-display text-[30px] tracking-tight">DAILY</h2>
         <div className="flex shrink-0 items-center gap-1">
           {!isToday && (
             <button
